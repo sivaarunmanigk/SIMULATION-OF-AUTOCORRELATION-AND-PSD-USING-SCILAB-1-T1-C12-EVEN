@@ -41,6 +41,42 @@ Verify the generated waveform using Tabulation and Model Waveform
 
 PROGRAM:
 
+    clc;
+    clear;
+    close;
+    
+    // Step 1: Define signal
+    t = 0:0.01:1;
+    x = sin(2 * %pi * 5 * t);  // example signal
+    
+    // Step 2: Autocorrelation
+    Rxx = xcorr(x);
+    
+    // Step 3: FFT
+    X = fft(x);
+    
+    // Step 4: PSD
+    PSD = abs(X).^2;
+    
+    // Frequency axis
+    n = length(x);
+    f = (0:n-1)/n;
+    
+    // -------- PLOTTING --------
+    subplot(3,1,1);
+    plot(t, x);
+    title("Input Signal");
+    
+    subplot(3,1,2);
+    plot(Rxx);
+    title("Autocorrelation");
+    
+    subplot(3,1,3);
+    plot(f, PSD);
+    title("Power Spectral Density (PSD)");
 OUTPUT:
+<img width="940" height="556" alt="image" src="https://github.com/user-attachments/assets/0867da10-3c1c-45bb-ad17-955075a36c41" />
+
 
 RESULT:
+![20260406_181012](https://github.com/user-attachments/assets/232e4ad9-74d0-471a-a987-8a609b0c19f8)
